@@ -46,7 +46,14 @@
       "started_at": "2026-10-10T15:02:02.994Z",
       "finished_at": "2026-10-10T15:02:02.994Z",
       "updated_by": "api-key:for-chatgpt-test-2"
+    },
+    "content": {
+      "status": "in_progress",
+      "summary": "Creating source-backed Overview, six STEP lesson categories, Conclusion; reviewing CRD matrix and linked code.",
+      "started_at": "2026-10-10T15:04:16.641Z",
+      "finished_at": null,
+      "updated_by": "api-key:for-chatgpt-test-2"
     }
   },
-  "updated_at": "2026-10-10T15:02:02.994Z"
+  "updated_at": "2026-10-10T15:04:16.641Z"
 }
