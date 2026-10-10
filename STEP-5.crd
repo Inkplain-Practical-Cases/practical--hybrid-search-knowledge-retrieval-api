@@ -1,11 +1,11 @@
 {
   "crd_version": 1,
-  "name": "Hybrid retrieval STEP-4",
-  "description": "Fuse hybrid ranking scores",
+  "name": "Hybrid retrieval STEP-5",
+  "description": "Rerank scoped search results",
   "generated_at": "2026-10-10T14:48:00Z",
   "source": {
     "repo": "https://github.com/Inkplain-Practical-Cases/practical--hybrid-search-knowledge-retrieval-api",
-    "revision": "step-04-fuse-hybrid-ranking-scores",
+    "revision": "step-05-rerank-scoped-search-results",
     "roots": {
       "backend": "app"
     },
@@ -158,6 +158,19 @@
             "type": "call",
             "label": "invokes",
             "evidence": "app/features/feature_pipeline/handlers/handle_request.py: service_fuse_scores(state)"
+          }
+        },
+        {
+          "id": "op-4",
+          "title": "service_rerank",
+          "origin": "imported",
+          "description": "Invokes service_rerank",
+          "show": true,
+          "calls": {
+            "component": "be.service_rerank",
+            "type": "call",
+            "label": "invokes",
+            "evidence": "app/features/feature_pipeline/handlers/handle_request.py: service_rerank(state)"
           }
         }
       ],
@@ -329,17 +342,57 @@
         }
       ],
       "attributes": {},
+      "step_change": "unchanged"
+    },
+    {
+      "id": "be.service_rerank",
+      "name": "service_rerank",
+      "kind": "function",
+      "side": "backend",
+      "layer": "service",
+      "description": "Implements scoped hybrid search service_rerank",
+      "flows": [
+        "retrieval"
+      ],
+      "source": {
+        "file": "app/features/feature_pipeline/services/service_rerank.py",
+        "symbol": "service_rerank",
+        "lines": [
+          1,
+          50
+        ]
+      },
+      "owner": "feature_pipeline",
+      "component_reason": "Real function on retrieval path",
+      "status": "observed",
+      "inputs": [
+        {
+          "id": "state",
+          "name": "state",
+          "description": "Tenant-scoped search request and accumulated results"
+        }
+      ],
+      "validations": [],
+      "operations": [],
+      "outputs": [
+        {
+          "id": "output",
+          "name": "state",
+          "description": "Ranked or transformed results"
+        }
+      ],
+      "attributes": {},
       "step_change": "added"
     }
   ],
   "dependencies": [],
   "unresolved": [],
   "step": {
-    "no": 4,
+    "no": 5,
     "of": 6,
-    "title": "Fuse hybrid ranking scores",
-    "branch": "step-04-fuse-hybrid-ranking-scores",
-    "previous": "STEP-3.crd",
+    "title": "Rerank scoped search results",
+    "branch": "step-05-rerank-scoped-search-results",
+    "previous": "STEP-4.crd",
     "removed": []
   }
 }

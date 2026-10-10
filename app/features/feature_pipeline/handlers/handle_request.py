@@ -4,9 +4,11 @@ from app.features.feature_pipeline.services.service_validate import service_vali
 from app.features.feature_pipeline.services.service_keyword_search import service_keyword_search
 from app.features.feature_pipeline.services.service_vector_search import service_vector_search
 from app.features.feature_pipeline.services.service_fuse_scores import service_fuse_scores
+from app.features.feature_pipeline.services.service_rerank import service_rerank
 def handle_request(body: SearchRequest) -> dict:
     state=service_validate(body.model_dump())
     state=service_keyword_search(state)
     state=service_vector_search(state)
     state=service_fuse_scores(state)
+    state=service_rerank(state)
     return state
