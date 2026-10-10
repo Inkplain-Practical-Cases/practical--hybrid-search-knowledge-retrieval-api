@@ -1,0 +1,38 @@
+{
+  "practical_case": {
+    "id": "CL2dOaF2nipzJyC09k11",
+    "slug": "hybrid-search-knowledge-retrieval-api",
+    "name": "Hybrid Search & Knowledge Retrieval API"
+  },
+  "current": "inkp",
+  "stages": {
+    "intro": {
+      "status": "done",
+      "summary": "Junior FDE profile and skill links, seven substantial introduction sections and distinct visual cover confirmed by MCP read-back.",
+      "started_at": "2026-10-10T14:34:22.615Z",
+      "finished_at": "2026-10-10T14:39:13.109Z",
+      "updated_by": "api-key:for-chatgpt-test-2",
+      "outputs": {
+        "portal_url": "/practical-case/hybrid-search-knowledge-retrieval-api",
+        "profile": "forward-deployed-engineering",
+        "level": "junior",
+        "intro_sections": 7,
+        "cover_url": "https://firebasestorage.googleapis.com/v0/b/pds-production-test.firebasestorage.app/o/knowledge%2Flibrary%2F1791643100889_hybrid-search-knowledge-retrieval-api-cover.png?alt=media&token=11011d83-56ea-4fd3-ac50-611d6e6534fb"
+      }
+    },
+    "repo": {
+      "status": "done",
+      "summary": "Six cumulative branch implementations with STEP-N.md/CRD, promoted final main with FINAL.crd, GitHub Actions pytest success on six branches and main.",
+      "started_at": "2026-10-10T14:41:14.651Z",
+      "finished_at": "2026-10-10T14:57:28.967Z",
+      "updated_by": "api-key:for-chatgpt-test-2",
+      "outputs": {
+        "repo_url": "https://github.com/Inkplain-Practical-Cases/practical--hybrid-search-knowledge-retrieval-api",
+        "steps": 6,
+        "ci_success": 7,
+        "ci_total": 7
+      }
+    }
+  },
+  "updated_at": "2026-10-10T14:57:28.967Z"
+}
