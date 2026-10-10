@@ -1,11 +1,11 @@
 {
   "crd_version": 1,
-  "name": "Hybrid retrieval STEP-5",
-  "description": "Rerank scoped search results",
-  "generated_at": "2026-10-10T14:48:00Z",
+  "name": "Hybrid retrieval STEP-6",
+  "description": "Cited results and evaluation",
+  "generated_at": "2026-10-10T14:50:00Z",
   "source": {
     "repo": "https://github.com/Inkplain-Practical-Cases/practical--hybrid-search-knowledge-retrieval-api",
-    "revision": "step-05-rerank-scoped-search-results",
+    "revision": "step-06-evidence-citations-and-evaluation",
     "roots": {
       "backend": "app"
     },
@@ -16,8 +16,8 @@
   "flows": [
     {
       "id": "retrieval",
-      "name": "Hybrid retrieval",
-      "description": "Tenant-aware retrieval process",
+      "name": "Hybrid search",
+      "description": "Search and cite",
       "entry": "be.submit"
     }
   ],
@@ -28,7 +28,7 @@
       "kind": "function",
       "side": "backend",
       "layer": "door",
-      "description": "Implements scoped hybrid search submit",
+      "description": "Live retrieval implementation submit",
       "flows": [
         "retrieval"
       ],
@@ -37,26 +37,26 @@
         "symbol": "submit",
         "lines": [
           1,
-          50
+          35
         ]
       },
       "owner": "feature_pipeline",
-      "component_reason": "Real function on retrieval path",
+      "component_reason": "Observed runtime function",
       "status": "observed",
       "inputs": [
         {
-          "id": "state",
+          "id": "input",
           "name": "state",
-          "description": "Tenant-scoped search request and accumulated results"
+          "description": "Tenant-scoped request or accumulated retrieval state"
         }
       ],
       "validations": [],
       "operations": [
         {
-          "id": "op-0",
+          "id": "call-0",
           "title": "handle_request",
           "origin": "imported",
-          "description": "Invokes handle_request",
+          "description": "Calls handle_request",
           "show": true,
           "calls": {
             "component": "be.handle_request",
@@ -70,7 +70,7 @@
         {
           "id": "output",
           "name": "state",
-          "description": "Ranked or transformed results"
+          "description": "Search result state"
         }
       ],
       "attributes": {
@@ -84,7 +84,7 @@
       "kind": "function",
       "side": "backend",
       "layer": "handler",
-      "description": "Implements scoped hybrid search handle_request",
+      "description": "Live retrieval implementation handle_request",
       "flows": [
         "retrieval"
       ],
@@ -93,26 +93,26 @@
         "symbol": "handle_request",
         "lines": [
           1,
-          50
+          35
         ]
       },
       "owner": "feature_pipeline",
-      "component_reason": "Real function on retrieval path",
+      "component_reason": "Observed runtime function",
       "status": "observed",
       "inputs": [
         {
-          "id": "state",
+          "id": "input",
           "name": "state",
-          "description": "Tenant-scoped search request and accumulated results"
+          "description": "Tenant-scoped request or accumulated retrieval state"
         }
       ],
       "validations": [],
       "operations": [
         {
-          "id": "op-0",
+          "id": "call-0",
           "title": "service_validate",
           "origin": "imported",
-          "description": "Invokes service_validate",
+          "description": "Calls service_validate",
           "show": true,
           "calls": {
             "component": "be.service_validate",
@@ -122,10 +122,10 @@
           }
         },
         {
-          "id": "op-1",
+          "id": "call-1",
           "title": "service_keyword_search",
           "origin": "imported",
-          "description": "Invokes service_keyword_search",
+          "description": "Calls service_keyword_search",
           "show": true,
           "calls": {
             "component": "be.service_keyword_search",
@@ -135,10 +135,10 @@
           }
         },
         {
-          "id": "op-2",
+          "id": "call-2",
           "title": "service_vector_search",
           "origin": "imported",
-          "description": "Invokes service_vector_search",
+          "description": "Calls service_vector_search",
           "show": true,
           "calls": {
             "component": "be.service_vector_search",
@@ -148,10 +148,10 @@
           }
         },
         {
-          "id": "op-3",
+          "id": "call-3",
           "title": "service_fuse_scores",
           "origin": "imported",
-          "description": "Invokes service_fuse_scores",
+          "description": "Calls service_fuse_scores",
           "show": true,
           "calls": {
             "component": "be.service_fuse_scores",
@@ -161,10 +161,10 @@
           }
         },
         {
-          "id": "op-4",
+          "id": "call-4",
           "title": "service_rerank",
           "origin": "imported",
-          "description": "Invokes service_rerank",
+          "description": "Calls service_rerank",
           "show": true,
           "calls": {
             "component": "be.service_rerank",
@@ -172,13 +172,26 @@
             "label": "invokes",
             "evidence": "app/features/feature_pipeline/handlers/handle_request.py: service_rerank(state)"
           }
+        },
+        {
+          "id": "call-5",
+          "title": "service_citations",
+          "origin": "imported",
+          "description": "Calls service_citations",
+          "show": true,
+          "calls": {
+            "component": "be.service_citations",
+            "type": "call",
+            "label": "invokes",
+            "evidence": "app/features/feature_pipeline/handlers/handle_request.py: service_citations(state)"
+          }
         }
       ],
       "outputs": [
         {
           "id": "output",
           "name": "state",
-          "description": "Ranked or transformed results"
+          "description": "Search result state"
         }
       ],
       "attributes": {},
@@ -190,7 +203,7 @@
       "kind": "function",
       "side": "backend",
       "layer": "service",
-      "description": "Implements scoped hybrid search service_validate",
+      "description": "Live retrieval implementation service_validate",
       "flows": [
         "retrieval"
       ],
@@ -199,17 +212,17 @@
         "symbol": "service_validate",
         "lines": [
           1,
-          50
+          35
         ]
       },
       "owner": "feature_pipeline",
-      "component_reason": "Real function on retrieval path",
+      "component_reason": "Observed runtime function",
       "status": "observed",
       "inputs": [
         {
-          "id": "state",
+          "id": "input",
           "name": "state",
-          "description": "Tenant-scoped search request and accumulated results"
+          "description": "Tenant-scoped request or accumulated retrieval state"
         }
       ],
       "validations": [],
@@ -218,7 +231,7 @@
         {
           "id": "output",
           "name": "state",
-          "description": "Ranked or transformed results"
+          "description": "Search result state"
         }
       ],
       "attributes": {},
@@ -230,7 +243,7 @@
       "kind": "function",
       "side": "backend",
       "layer": "service",
-      "description": "Implements scoped hybrid search service_keyword_search",
+      "description": "Live retrieval implementation service_keyword_search",
       "flows": [
         "retrieval"
       ],
@@ -239,17 +252,17 @@
         "symbol": "service_keyword_search",
         "lines": [
           1,
-          50
+          35
         ]
       },
       "owner": "feature_pipeline",
-      "component_reason": "Real function on retrieval path",
+      "component_reason": "Observed runtime function",
       "status": "observed",
       "inputs": [
         {
-          "id": "state",
+          "id": "input",
           "name": "state",
-          "description": "Tenant-scoped search request and accumulated results"
+          "description": "Tenant-scoped request or accumulated retrieval state"
         }
       ],
       "validations": [],
@@ -258,7 +271,7 @@
         {
           "id": "output",
           "name": "state",
-          "description": "Ranked or transformed results"
+          "description": "Search result state"
         }
       ],
       "attributes": {},
@@ -270,7 +283,7 @@
       "kind": "function",
       "side": "backend",
       "layer": "service",
-      "description": "Implements scoped hybrid search service_vector_search",
+      "description": "Live retrieval implementation service_vector_search",
       "flows": [
         "retrieval"
       ],
@@ -279,17 +292,17 @@
         "symbol": "service_vector_search",
         "lines": [
           1,
-          50
+          35
         ]
       },
       "owner": "feature_pipeline",
-      "component_reason": "Real function on retrieval path",
+      "component_reason": "Observed runtime function",
       "status": "observed",
       "inputs": [
         {
-          "id": "state",
+          "id": "input",
           "name": "state",
-          "description": "Tenant-scoped search request and accumulated results"
+          "description": "Tenant-scoped request or accumulated retrieval state"
         }
       ],
       "validations": [],
@@ -298,7 +311,7 @@
         {
           "id": "output",
           "name": "state",
-          "description": "Ranked or transformed results"
+          "description": "Search result state"
         }
       ],
       "attributes": {},
@@ -310,7 +323,7 @@
       "kind": "function",
       "side": "backend",
       "layer": "service",
-      "description": "Implements scoped hybrid search service_fuse_scores",
+      "description": "Live retrieval implementation service_fuse_scores",
       "flows": [
         "retrieval"
       ],
@@ -319,17 +332,17 @@
         "symbol": "service_fuse_scores",
         "lines": [
           1,
-          50
+          35
         ]
       },
       "owner": "feature_pipeline",
-      "component_reason": "Real function on retrieval path",
+      "component_reason": "Observed runtime function",
       "status": "observed",
       "inputs": [
         {
-          "id": "state",
+          "id": "input",
           "name": "state",
-          "description": "Tenant-scoped search request and accumulated results"
+          "description": "Tenant-scoped request or accumulated retrieval state"
         }
       ],
       "validations": [],
@@ -338,7 +351,7 @@
         {
           "id": "output",
           "name": "state",
-          "description": "Ranked or transformed results"
+          "description": "Search result state"
         }
       ],
       "attributes": {},
@@ -350,7 +363,7 @@
       "kind": "function",
       "side": "backend",
       "layer": "service",
-      "description": "Implements scoped hybrid search service_rerank",
+      "description": "Live retrieval implementation service_rerank",
       "flows": [
         "retrieval"
       ],
@@ -359,17 +372,17 @@
         "symbol": "service_rerank",
         "lines": [
           1,
-          50
+          35
         ]
       },
       "owner": "feature_pipeline",
-      "component_reason": "Real function on retrieval path",
+      "component_reason": "Observed runtime function",
       "status": "observed",
       "inputs": [
         {
-          "id": "state",
+          "id": "input",
           "name": "state",
-          "description": "Tenant-scoped search request and accumulated results"
+          "description": "Tenant-scoped request or accumulated retrieval state"
         }
       ],
       "validations": [],
@@ -378,7 +391,47 @@
         {
           "id": "output",
           "name": "state",
-          "description": "Ranked or transformed results"
+          "description": "Search result state"
+        }
+      ],
+      "attributes": {},
+      "step_change": "unchanged"
+    },
+    {
+      "id": "be.service_citations",
+      "name": "service_citations",
+      "kind": "function",
+      "side": "backend",
+      "layer": "service",
+      "description": "Live retrieval implementation service_citations",
+      "flows": [
+        "retrieval"
+      ],
+      "source": {
+        "file": "app/features/feature_pipeline/services/service_citations.py",
+        "symbol": "service_citations",
+        "lines": [
+          1,
+          35
+        ]
+      },
+      "owner": "feature_pipeline",
+      "component_reason": "Observed runtime function",
+      "status": "observed",
+      "inputs": [
+        {
+          "id": "input",
+          "name": "state",
+          "description": "Tenant-scoped request or accumulated retrieval state"
+        }
+      ],
+      "validations": [],
+      "operations": [],
+      "outputs": [
+        {
+          "id": "output",
+          "name": "state",
+          "description": "Search result state"
         }
       ],
       "attributes": {},
@@ -388,11 +441,11 @@
   "dependencies": [],
   "unresolved": [],
   "step": {
-    "no": 5,
+    "no": 6,
     "of": 6,
-    "title": "Rerank scoped search results",
-    "branch": "step-05-rerank-scoped-search-results",
-    "previous": "STEP-4.crd",
+    "title": "Evidence citations and evaluation",
+    "branch": "step-06-evidence-citations-and-evaluation",
+    "previous": "STEP-5.crd",
     "removed": []
   }
 }
