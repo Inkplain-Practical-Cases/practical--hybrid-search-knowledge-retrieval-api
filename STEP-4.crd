@@ -1,11 +1,11 @@
 {
   "crd_version": 1,
-  "name": "Hybrid retrieval STEP-3",
-  "description": "Implement semantic retrieval adapter",
+  "name": "Hybrid retrieval STEP-4",
+  "description": "Fuse hybrid ranking scores",
   "generated_at": "2026-10-10T14:48:00Z",
   "source": {
     "repo": "https://github.com/Inkplain-Practical-Cases/practical--hybrid-search-knowledge-retrieval-api",
-    "revision": "step-03-implement-semantic-retrieval-adapter",
+    "revision": "step-04-fuse-hybrid-ranking-scores",
     "roots": {
       "backend": "app"
     },
@@ -146,6 +146,19 @@
             "label": "invokes",
             "evidence": "app/features/feature_pipeline/handlers/handle_request.py: service_vector_search(state)"
           }
+        },
+        {
+          "id": "op-3",
+          "title": "service_fuse_scores",
+          "origin": "imported",
+          "description": "Invokes service_fuse_scores",
+          "show": true,
+          "calls": {
+            "component": "be.service_fuse_scores",
+            "type": "call",
+            "label": "invokes",
+            "evidence": "app/features/feature_pipeline/handlers/handle_request.py: service_fuse_scores(state)"
+          }
         }
       ],
       "outputs": [
@@ -276,17 +289,57 @@
         }
       ],
       "attributes": {},
+      "step_change": "unchanged"
+    },
+    {
+      "id": "be.service_fuse_scores",
+      "name": "service_fuse_scores",
+      "kind": "function",
+      "side": "backend",
+      "layer": "service",
+      "description": "Implements scoped hybrid search service_fuse_scores",
+      "flows": [
+        "retrieval"
+      ],
+      "source": {
+        "file": "app/features/feature_pipeline/services/service_fuse_scores.py",
+        "symbol": "service_fuse_scores",
+        "lines": [
+          1,
+          50
+        ]
+      },
+      "owner": "feature_pipeline",
+      "component_reason": "Real function on retrieval path",
+      "status": "observed",
+      "inputs": [
+        {
+          "id": "state",
+          "name": "state",
+          "description": "Tenant-scoped search request and accumulated results"
+        }
+      ],
+      "validations": [],
+      "operations": [],
+      "outputs": [
+        {
+          "id": "output",
+          "name": "state",
+          "description": "Ranked or transformed results"
+        }
+      ],
+      "attributes": {},
       "step_change": "added"
     }
   ],
   "dependencies": [],
   "unresolved": [],
   "step": {
-    "no": 3,
+    "no": 4,
     "of": 6,
-    "title": "Implement semantic retrieval adapter",
-    "branch": "step-03-implement-semantic-retrieval-adapter",
-    "previous": "STEP-2.crd",
+    "title": "Fuse hybrid ranking scores",
+    "branch": "step-04-fuse-hybrid-ranking-scores",
+    "previous": "STEP-3.crd",
     "removed": []
   }
 }
