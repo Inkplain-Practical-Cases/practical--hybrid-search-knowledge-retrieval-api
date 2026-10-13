@@ -49,7 +49,7 @@
     },
     "content": {
       "status": "done",
-      "summary": "Final source audit: lexical and semantic retrieval use synthetic fixture scores and request dictionaries. There is no persisted vector index/database schema behind the educational adapter, so no entity diagram is warranted.",
+      "summary": "Added live SQLite search HTTP audit (request/outcome FK), STEP-6.erd, FINAL.erd, STEP-6-ERD Simulator tab and second-position portal database lesson.",
       "started_at": "2026-10-10T15:04:16.641Z",
       "finished_at": "2026-10-10T15:31:52.447Z",
       "updated_by": "api-key:for-chatgpt-test-2",
@@ -60,11 +60,14 @@
         "step_items": 24,
         "structural_qa": true,
         "erd_audit_complete": true,
-        "erd_applicable_steps": [],
-        "erd_not_applicable": true,
-        "erd_lessons_created": 0
+        "erd_applicable_steps": [
+          6
+        ],
+        "erd_not_applicable": false,
+        "erd_lessons_created": 1,
+        "erd_item_title": "Database (Entity) Relations"
       }
     }
   },
-  "updated_at": "2026-10-13T13:46:16.481Z"
+  "updated_at": "2026-10-13T15:52:03.135Z"
 }
